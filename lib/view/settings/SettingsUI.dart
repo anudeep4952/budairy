@@ -2,7 +2,6 @@ import 'package:budairy/controller/SettingsController.dart';
 import 'package:budairy/model/diary/DiaryRecordModel.dart';
 import 'package:budairy/view/widgets/progressbar.dart';
 import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
-import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,6 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
   String path1;
   SettingsController sc;
   bool isLoading=false;
-  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
   EncryptedSharedPreferences encryptedSharedPreferences;
 
 
@@ -56,9 +54,9 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                   fontSize: 18,
                   background: Colors.blueGrey,
                   onPressed: () async {
-                    Dialogs.showLoadingDialog(context, _keyLoader);
+                    Dialogs.showLoadingDialog(context);
                     await sc.backup();
-                    Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+                    Navigator.of(context,rootNavigator: true).pop();
                     setState(() {
 
                     });},
@@ -69,9 +67,9 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                   fontSize: 18,
                   background: Colors.blueGrey,
                   onPressed: () async {
-                    Dialogs.showLoadingDialog(context, _keyLoader);
+                    Dialogs.showLoadingDialog(context);
                     var msg = await sc.backUpToDevice();
-                    Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+                    Navigator.of(context,rootNavigator: true).pop();
                     Toast.show(msg, context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
@@ -83,9 +81,9 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                   background: Colors.blueGrey,
                   onPressed: () async {
                     String _path = await _openFileExplorer();
-                    Dialogs.showLoadingDialog(context, _keyLoader);
+                    Dialogs.showLoadingDialog(context);
                     var msg = await sc.getbackup(_path);
-                    Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+                    Navigator.of(context,rootNavigator: true).pop();
                     Toast.show(msg, context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   },
@@ -98,11 +96,15 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                   onPressed: () async {
                     bool val=await deleteAlertWidget();
                     if(val) {
-                      Dialogs.showLoadingDialog(context, _keyLoader);
-                      var msg = await sc.deleteDiaryRecords();
-                      Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
-                      Toast.show(msg, context, duration: Toast.LENGTH_LONG,
-                          gravity: Toast.BOTTOM);
+                      Dialogs.showLoadingDialog(context);
+                       sc.deleteDiaryRecords().then((msg){
+                         setState(() {
+
+                         });
+                        Navigator.of(context,rootNavigator: true).pop();
+                        Toast.show(msg, context, duration: Toast.LENGTH_LONG,
+                            gravity: Toast.BOTTOM);
+                      });
                     }
                   },
                 ),
@@ -114,9 +116,9 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                   onPressed: () async {
                     bool val=await deleteAlertWidget();
                     if(val) {
-                      Dialogs.showLoadingDialog(context, _keyLoader);
+                      Dialogs.showLoadingDialog(context);
                       var msg = await sc.deleteBudgetRecords();
-                      Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
+                      Navigator.of(context,rootNavigator: true).pop();
                       Toast.show(msg, context, duration: Toast.LENGTH_LONG,
                           gravity: Toast.BOTTOM);
                     }
