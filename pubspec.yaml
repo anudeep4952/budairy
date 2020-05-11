@@ -45,12 +45,18 @@ dependencies:
   encrypted_shared_preferences: ^1.0.5
   xxtea: ^2.0.3
   rflutter_alert: ^1.0.3
-
+  flutter_launcher_icons: ^0.7.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.5"
 
+flutter_icons:
+  image_path_android: "assets/images/logo.jpg"
+  image_path_ios: "assets/images/logo.jpg"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -356,3 +356,4 @@ class _PasswordState extends State<Password> {
   }
 
 }
+// export PATH='/home/bazigar/Documents/flutter_linux_v1.12.13 hotfix.8-stable/flutter/bin':$PATH

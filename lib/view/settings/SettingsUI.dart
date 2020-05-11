@@ -98,9 +98,6 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
                     if(val) {
                       Dialogs.showLoadingDialog(context);
                        sc.deleteDiaryRecords().then((msg){
-                         setState(() {
-
-                         });
                         Navigator.of(context,rootNavigator: true).pop();
                         Toast.show(msg, context, duration: Toast.LENGTH_LONG,
                             gravity: Toast.BOTTOM);
