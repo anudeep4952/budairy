@@ -15,6 +15,7 @@ class _HelpScreenState extends State<HelpScreen> {
   String backup =
       "Click on load backup and select the 'backup.json' file. All your records will be restored. This is used when your moving to a new device ";
  String contact="anudeep.insvirat@gmail.com \n8096297339";
+ String updates="For updates keep visiting \nhttps://github.com/anudeep4952/budairy";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +47,8 @@ class _HelpScreenState extends State<HelpScreen> {
                     helpWidget('Load Backup', backup),
                     SizedBox(height: 24,),
                     helpWidget('Contact', contact),
+                    SizedBox(height: 24,),
+                    helpWidget('Updates', updates)
               ],
             ),
           ),
