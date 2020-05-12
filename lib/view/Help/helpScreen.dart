@@ -15,7 +15,7 @@ class _HelpScreenState extends State<HelpScreen> {
   String shareBackup =
       "When the share backup is invoked all the records can be shared as a file 'backup.json' . Later download this file to perform backup";
   String backup =
-      "Click on load backup and select the 'backup.json' file. All your records will be restored. This is used when your moving to a new device ";
+      "Click on load backup and select the 'backup.json' file. All your records will be restored. This is useful when you are moving to a new device ";
  String mailid="anudeep.insvirat@gmail.com";
  String updates="https://github.com/anudeep4952/budiaryApk";
  String mailto="mailto:anudeep.insvirat@gmail.com?subject=BUDIARY";
