@@ -154,7 +154,7 @@ class _UsageState extends State<Usage> {
                         Toast.show(response, context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
                       }
                       },
-                    color: Colors.teal,
+                    color: Colors.blue,
                     textColor: Colors.white,
                     child: Icon(
                       Icons.send,

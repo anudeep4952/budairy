@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-import 'package:toast/toast.dart';
 
 import 'DiaryEdit.dart';
 

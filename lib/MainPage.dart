@@ -5,6 +5,7 @@ import 'package:budairy/view/settings/SettingsUI.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:toast/toast.dart';
 
 class MainWidget extends StatefulWidget {
   MainWidget({Key key, this.title}) : super(key: key);
@@ -16,6 +17,8 @@ class MainWidget extends StatefulWidget {
 
 class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   KFDrawerController _drawerController;
+
+  var currentBackPressTime;
 
   @override
   void initState() {
@@ -59,35 +62,48 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: KFDrawer(
+      body: WillPopScope(
+        onWillPop: onWillPop,
+        child: KFDrawer(
 //        borderRadius: 0.0,
 //        shadowBorderRadius: 0.0,
 //        menuPadding: EdgeInsets.all(0.0),
 //        scrollable: true,
-        controller: _drawerController,
-        header: Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            width: MediaQuery.of(context).size.width * 0.6,
-            color: Colors.teal,
+          controller: _drawerController,
+          header: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              width: MediaQuery.of(context).size.width * 0.6,
+              color: Colors.teal,
+            ),
           ),
-        ),
-        footer: KFDrawerItem(
-          text: Text(
-            'v 0.0.1',
-            style: TextStyle(color: Colors.white),
+          footer: KFDrawerItem(
+            text: Text(
+              'v 0.0.1',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color.fromRGBO(255, 255, 255, 1.0), Color.fromRGBO(44, 72, 171, 1.0)],
-            tileMode: TileMode.repeated,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color.fromRGBO(255, 255, 255, 1.0), Color.fromRGBO(44, 72, 171, 1.0)],
+              tileMode: TileMode.repeated,
+            ),
           ),
         ),
       ),
     );
+  }
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Toast.show("press back again to exit", context,duration: Toast.LENGTH_LONG,gravity: Toast.BOTTOM);
+      return Future.value(false);
+    }
+    return Future.value(true);
   }
 }

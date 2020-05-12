@@ -46,7 +46,7 @@ dependencies:
   xxtea: ^2.0.3
   rflutter_alert: ^1.0.3
   flutter_launcher_icons: ^0.7.5
-
+  url_launcher: ^5.4.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

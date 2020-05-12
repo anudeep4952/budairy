@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpScreen extends KFDrawerContent {
   @override
@@ -14,14 +16,20 @@ class _HelpScreenState extends State<HelpScreen> {
       "When the share backup is invoked all the records can be shared as a file 'backup.json' . Later download this file to perform backup";
   String backup =
       "Click on load backup and select the 'backup.json' file. All your records will be restored. This is used when your moving to a new device ";
- String contact="Gadi Srinivasa Sai Anudeep \nanudeep.insvirat@gmail.com \n8096297339";
- String updates="For updates keep visiting \nhttps://github.com/anudeep4952/budairyApk";
+ String mailid="anudeep.insvirat@gmail.com";
+ String updates="https://github.com/anudeep4952/budiaryApk";
+ String mailto="mailto:anudeep.insvirat@gmail.com?subject=BUDIARY";
+
+
+  @override
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         //resizeToAvoidBottomPadding: false,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+            backgroundColor: Colors.green,
             title: Text('Help'),
             leading: IconButton(
               icon: Icon(
@@ -46,9 +54,22 @@ class _HelpScreenState extends State<HelpScreen> {
                     SizedBox(height: 24,),
                     helpWidget('Load Backup', backup),
                     SizedBox(height: 24,),
-                    helpWidget('Contact', contact),
+                    GestureDetector(
+                      child:helpWidget1('Contact', mailid),
+                    onTap: () async {
+                        if (await canLaunch(mailto)) {
+                      await launch(mailto);
+                      }
+                    },),
                     SizedBox(height: 24,),
-                    helpWidget('Updates', updates)
+                GestureDetector(
+                  child:helpWidget1('For updates visit', updates),
+                  onTap: ()async {
+                    if (await canLaunch(updates)) {
+                      await launch(updates);
+                    }
+                  },
+                )
               ],
             ),
           ),
@@ -67,6 +88,30 @@ class _HelpScreenState extends State<HelpScreen> {
           mainAxisSize:MainAxisSize.max,
           children: <Widget>[
             Expanded(child: RichText(text: TextSpan(text: matter,style:TextStyle(color: Colors.black54, fontSize: 15,)),textAlign: TextAlign.justify,
+            )
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Divider(thickness: 2,)
+      ],
+    );
+  }
+
+  helpWidget1(String label,String matter){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(label,style:TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16)),
+        Row(
+          mainAxisSize:MainAxisSize.max,
+          children: <Widget>[
+            Expanded(child: RichText(text: TextSpan(text: matter,style:TextStyle(color: Colors.blue, fontSize: 15,)),textAlign: TextAlign.justify,
             )
             ),
           ],

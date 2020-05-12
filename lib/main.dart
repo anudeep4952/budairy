@@ -40,7 +40,7 @@ class _PasswordState extends State<Password> {
   String pass;
   TextStyle style = TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0);
   EncryptedSharedPreferences encryptedSharedPreferences;
-
+  String phoneNumber,appName;
   var onTapRecognizer;
   var onTapRecognizer1;
 
@@ -55,6 +55,8 @@ class _PasswordState extends State<Password> {
   @override
   void initState() {
     encryptedSharedPreferences = EncryptedSharedPreferences();
+    this.phoneNumber="918096297339";
+    this.appName="BUDIARY";
     onTapRecognizer = TapGestureRecognizer()
       ..onTap = () async {
         scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -116,8 +118,8 @@ class _PasswordState extends State<Password> {
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                 child: RichText(
                   text: TextSpan(
-                      text: "Enter the pin",
-                      style: TextStyle(color: Colors.black, fontSize: 24,fontWeight: FontWeight.bold)),
+                      text: this.appName,
+                      style: TextStyle(color: Color.fromRGBO(139,0,0,1), fontSize: 36,fontWeight: FontWeight.bold,letterSpacing:3, )),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -269,7 +271,7 @@ class _PasswordState extends State<Password> {
 
   Future<void> requestDeveloper(String msg) async {
     String deviceid = await DeviceId.getID;
-    await FlutterOpenWhatsapp.sendSingleMessage("918096297339", deviceid+"\n\n"+msg);
+    await FlutterOpenWhatsapp.sendSingleMessage(this.phoneNumber, deviceid+"\n\n"+msg);
   }
 
   Future<String> verifyPassword() async{

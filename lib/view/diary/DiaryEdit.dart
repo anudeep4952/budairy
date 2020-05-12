@@ -80,7 +80,7 @@ class _DiaryEditState extends State<DiaryEdit> {
                         icon: Icon(Icons.share),
                         iconSize: 36,
                         onPressed: () {
-                          _shareText(this.title, this.notes);
+                          _shareText(this.title, drm.year + "," + drm.month + " " + drm.date+'\n'+this.title+'\n'+this.notes);
                           setState(() {});
                         },
                       ),
